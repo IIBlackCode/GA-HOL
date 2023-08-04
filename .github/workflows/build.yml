@@ -1,0 +1,33 @@
+name: Build and Push to ACR
+
+on:
+  workflow_call:
+      secrets:
+        AZURE_CREDENTIALS:
+          required: true
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AZURE_CONTAINER_REGISTRY: ${{ vars.REGISTRY_NAME }}
+  CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
+  RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP_NAME }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out the repository this file is in
+      - uses: actions/checkout@v3
+
+      # Logs in with your Azure credentials
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+
+      # Builds and pushes an image up to your Azure Container Registry
+      - name: Build and push image to ACR
+        run: |
+          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.run_number }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} ./demo-jar
