@@ -1,0 +1,25 @@
+name: Workflow Call
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+jobs:
+  buildImage:
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/build.yml
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      
+  deployToAKS:
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    needs: [buildImage]
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
