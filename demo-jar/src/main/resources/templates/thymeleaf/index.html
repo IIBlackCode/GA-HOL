@@ -368,6 +368,20 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Azure App Service CICD TEST</h1>
+                        <h5 id="clock"></h5>
+                        <script>
+                            function clock(){
+                                let timetext = document.querySelector('#clock'); 
+                                let today = new Date(); 
+                                let H = today.getHours();
+                                let M = today.getMinutes();
+                                let S = today.getSeconds();
+                                timetext.innerHTML = H + ":" + M + ":" + S; 
+                            }
+                            clock();
+                            setInterval(clock,1000); 
+                        </script>
+
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
