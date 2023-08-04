@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'DS-DIGII';
+    src: url('./font/ds_digital/DS-DIGII.TTF');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#clock {
+    font-family: 'DS-DIGII' !important;
+
+}

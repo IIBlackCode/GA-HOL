@@ -20,6 +20,9 @@
     <!-- Custom styles for this template-->
     <link href="/Admin-startbootstrap/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Custom styles for Clock-->
+    <link href="/clock.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -368,7 +371,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Azure App Service CICD TEST</h1>
-                        <h5 id="clock"></h5>
+                        <h1 class="" id="clock"></h1>
                         <script>
                             function clock(){
                                 let timetext = document.querySelector('#clock'); 
@@ -376,6 +379,15 @@
                                 let H = today.getHours();
                                 let M = today.getMinutes();
                                 let S = today.getSeconds();
+                                if(H < 10 ){
+                                    H = "0"+H
+                                }
+                                if(M < 10 ){
+                                    M = "0"+M
+                                }
+                                if(S < 10 ){
+                                    S = "0"+S
+                                }
                                 timetext.innerHTML = H + ":" + M + ":" + S; 
                             }
                             clock();
